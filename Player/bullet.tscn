@@ -1,0 +1,44 @@
+[gd_scene load_steps=6 format=3 uid="uid://bry74kmdxkdxs"]
+
+[ext_resource type="Texture2D" uid="uid://c7usp188qcqr3" path="res://Player/shot.png" id="1_2ndbg"]
+[ext_resource type="Script" path="res://Player/bullet.gd" id="2_cmtjk"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2hq1u"]
+atlas = ExtResource("1_2ndbg")
+region = Rect2(0, 0, 6, 4)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_splci"]
+atlas = ExtResource("1_2ndbg")
+region = Rect2(6, 0, 6, 4)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_gyxsa"]
+animations = [{
+"frames": [],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2hq1u")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_splci")
+}],
+"loop": true,
+"name": &"shot",
+"speed": 10.0
+}]
+
+[node name="Bullet" type="AnimatedSprite2D"]
+sprite_frames = SubResource("SpriteFrames_gyxsa")
+animation = &"shot"
+frame_progress = 0.286387
+script = ExtResource("2_cmtjk")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 5.0
+one_shot = true
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
