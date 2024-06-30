@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://dt0vhbsvhfkf" path="res://levels/base_level.tscn" id="1_xrkdb"]
 [ext_resource type="PackedScene" uid="uid://ci7bmadwlres0" path="res://background/parallax_background.tscn" id="2_3nrdk"]
-[ext_resource type="PackedScene" uid="uid://chgu330lw8ih" path="res://Enemies/enemy_crab.tscn" id="3_qj1ha"]
+[ext_resource type="PackedScene" uid="uid://chgu330lw8ih" path="res://Enemies/crab/enemy_crab.tscn" id="3_qj1ha"]
 
 [node name="Level1" instance=ExtResource("1_xrkdb")]
 
