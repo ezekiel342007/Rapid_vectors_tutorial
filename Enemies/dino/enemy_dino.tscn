@@ -116,7 +116,6 @@ position = Vector2(0, -13)
 sprite_frames = SubResource("SpriteFrames_0j8ha")
 animation = &"idle"
 autoplay = "idle"
-frame_progress = 0.642664
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -11)
@@ -139,9 +138,13 @@ initial_node_state = NodePath("idle")
 script = ExtResource("5_jk67s")
 character_body_2d = NodePath("../..")
 animated_sprite_2d = NodePath("../../AnimatedSprite2D")
+slow_down_speed = 300
 
-[node name="attack" type="Node" parent="StateMachine"]
+[node name="attack" type="Node" parent="StateMachine" node_paths=PackedStringArray("character_body_2d", "animated_sprite_2d")]
 script = ExtResource("6_ugr7d")
+character_body_2d = NodePath("../..")
+animated_sprite_2d = NodePath("../../AnimatedSprite2D")
+speed = 100
 
 [node name="AttackArea2D" type="Area2D" parent="."]
 collision_layer = 4
