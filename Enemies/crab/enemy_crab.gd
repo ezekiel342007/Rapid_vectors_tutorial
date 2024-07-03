@@ -4,6 +4,7 @@ extends CharacterBody2D
 @export var wait_time: int = 3
 @export var patrol_points: Node
 @export var health_amount: int = 3 
+@export var damage_amount: int = 1 
 @onready var timer = $Timer
 @onready var animated_sprite_2d = $AnimatedSprite2D
 
