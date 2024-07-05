@@ -1,6 +1,27 @@
-[gd_scene load_steps=10 format=3 uid="uid://b1aww2hvgb43n"]
+[gd_scene load_steps=15 format=3 uid="uid://b1aww2hvgb43n"]
 
 [ext_resource type="Texture2D" uid="uid://di2kv3qshfx0h" path="res://Player/player_death_effect/spark_purple.png" id="1_pts10"]
+[ext_resource type="Script" path="res://Player/player_death_effect/player_death_effect.gd" id="1_ylfpd"]
+[ext_resource type="Texture2D" uid="uid://cl3v6noijbcvo" path="res://Player/player_death_effect/particle.png" id="2_owuq7"]
+
+[sub_resource type="Gradient" id="Gradient_m5via"]
+colors = PackedColorArray(0.835294, 0.0784314, 0.423529, 1, 1, 0.635294, 0.901961, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_qrql1"]
+gradient = SubResource("Gradient_m5via")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_5yf14"]
+particle_flag_disable_z = true
+emission_shape = 1
+emission_sphere_radius = 35.0
+inherit_velocity_ratio = 30.0
+direction = Vector3(0, -0.5, 0)
+initial_velocity_min = 30.0
+initial_velocity_max = 30.0
+gravity = Vector3(0, 0, 0)
+scale_min = 0.0
+scale_max = 0.5
+color_ramp = SubResource("GradientTexture1D_qrql1")
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_8fre2"]
 atlas = ExtResource("1_pts10")
@@ -68,11 +89,26 @@ animations = [{
 }]
 
 [node name="PlayerDeathEffect" type="Node2D"]
+script = ExtResource("1_ylfpd")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+position = Vector2(0, -13)
+amount = 100
+process_material = SubResource("ParticleProcessMaterial_5yf14")
+texture = ExtResource("2_owuq7")
+speed_scale = 1.5
+explosiveness = 0.5
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -14)
 sprite_frames = SubResource("SpriteFrames_jslye")
 animation = &"death_effect"
 autoplay = "death_effect"
-frame = 7
-frame_progress = 1.0
+frame = 4
+frame_progress = 0.700397
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
