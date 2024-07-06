@@ -1,6 +1,5 @@
 extends Node2D
-
-@export var award_amount: int = 1
+@export var award_amount: int = 5
 
 @onready var label = $Label
 @onready var animated_sprite_2d = $AnimatedSprite2D

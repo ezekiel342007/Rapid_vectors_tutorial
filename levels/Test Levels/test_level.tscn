@@ -1,10 +1,14 @@
-[gd_scene load_steps=6 format=3 uid="uid://2yap0wntdqxi"]
+[gd_scene load_steps=10 format=3 uid="uid://2yap0wntdqxi"]
 
 [ext_resource type="PackedScene" uid="uid://dt0vhbsvhfkf" path="res://levels/base_level.tscn" id="1_38llp"]
 [ext_resource type="PackedScene" uid="uid://ci7bmadwlres0" path="res://background/parallax_background.tscn" id="2_witvc"]
 [ext_resource type="PackedScene" uid="uid://cyg1btbnei52j" path="res://pickups/health_pickup/health_pickup.tscn" id="3_gtlye"]
 [ext_resource type="PackedScene" uid="uid://chgu330lw8ih" path="res://Enemies/crab/enemy_crab.tscn" id="4_2gvgy"]
 [ext_resource type="PackedScene" uid="uid://dnarrxvkm2vq3" path="res://ui/game_screen.tscn" id="4_5swjq"]
+[ext_resource type="PackedScene" uid="uid://cj81r8ndlhnkp" path="res://Collectibles/Blue_coin/blue_coin.tscn" id="5_0wypa"]
+[ext_resource type="PackedScene" uid="uid://lvx4kvv7tnry" path="res://Collectibles/Blue_diamond/blue_diamond.tscn" id="6_ms5eg"]
+[ext_resource type="PackedScene" uid="uid://x5ltqrudumn0" path="res://Collectibles/Blue_jewel/blue_jewel.tscn" id="7_pdywo"]
+[ext_resource type="PackedScene" uid="uid://cqk50nfsebdtk" path="res://Collectibles/Gold_coin/gold_coin.tscn" id="8_01vsh"]
 
 [node name="TestLevel" instance=ExtResource("1_38llp")]
 
@@ -23,4 +27,18 @@ position = Vector2(443, -70)
 [node name="HealthPickup" parent="Pickups" index="0" instance=ExtResource("3_gtlye")]
 position = Vector2(335, -152)
 
-[node name="GameScreen" parent="." index="5" instance=ExtResource("4_5swjq")]
+[node name="Collectibles" type="Node" parent="." index="4"]
+
+[node name="BlueCoin" parent="Collectibles" index="0" instance=ExtResource("5_0wypa")]
+position = Vector2(269, -81)
+
+[node name="BlueDiamond" parent="Collectibles" index="1" instance=ExtResource("6_ms5eg")]
+position = Vector2(530, -77)
+
+[node name="BlueJewel" parent="Collectibles" index="2" instance=ExtResource("7_pdywo")]
+position = Vector2(606, -77)
+
+[node name="GoldCoin" parent="Collectibles" index="3" instance=ExtResource("8_01vsh")]
+position = Vector2(163, -90)
+
+[node name="GameScreen" parent="." index="6" instance=ExtResource("4_5swjq")]

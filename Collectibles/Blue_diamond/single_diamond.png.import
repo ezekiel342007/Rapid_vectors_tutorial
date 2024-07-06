@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://kxhvv0rellow"
-path="res://.godot/imported/coins-cut-out.png-864b1b8849d4a712121a09e96500f78c.ctex"
+uid="uid://bycojybj06v7"
+path="res://.godot/imported/single_diamond.png-538068a359a12d9ade9a5874e5df0482.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Collectibles/coins-cut-out.png"
-dest_files=["res://.godot/imported/coins-cut-out.png-864b1b8849d4a712121a09e96500f78c.ctex"]
+source_file="res://Collectibles/Blue_diamond/single_diamond.png"
+dest_files=["res://.godot/imported/single_diamond.png-538068a359a12d9ade9a5874e5df0482.ctex"]
 
 [params]
 

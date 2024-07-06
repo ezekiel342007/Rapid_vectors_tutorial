@@ -1,23 +1,22 @@
 extends Node2D
 
-@export var award_amount: int = 1
-
-@onready var label = $Label
+@onready var label = $GoldCoinLabel
 @onready var animated_sprite_2d = $AnimatedSprite2D
 
+var award_amount: int = 10
 
 func _ready():
 	label.hide()
 
-
 func _on_area_2d_body_entered(body):
 	if body.is_in_group("Player"):
-		print(award_amount)
+		print("coid collected")
+
+	CollectibleManager.give_collectible_award(award_amount)
 
 	animated_sprite_2d.hide()
-
 	label.text = "%s" % award_amount
-	CollectibleManager.give_collectible_award(award_amount)
+
 	label.show()
 
 	var tween = get_tree().create_tween()
