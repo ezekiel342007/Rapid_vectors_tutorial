@@ -1,11 +1,67 @@
-[gd_resource type="Theme" load_steps=2 format=3 uid="uid://tdfxp5enye7u"]
+[gd_resource type="Theme" load_steps=7 format=3 uid="uid://tdfxp5enye7u"]
 
 [ext_resource type="FontFile" uid="uid://dl6caw7hw1mmy" path="res://ui/Theme/GravityRegular5.ttf" id="1_yvlxm"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4t2u5"]
+content_margin_left = 10.0
+content_margin_top = 5.0
+content_margin_right = 10.0
+content_margin_bottom = 5.0
+bg_color = Color(0.202611, 0.13881, 0.465933, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.231373, 0.0666667, 0.345098, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_swwbs"]
+content_margin_left = 10.0
+content_margin_top = 5.0
+content_margin_right = 10.0
+content_margin_bottom = 5.0
+bg_color = Color(0.558869, 0.524005, 0.935719, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.231373, 0.0666667, 0.345098, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ghyt1"]
+content_margin_left = 10.0
+content_margin_top = 5.0
+content_margin_right = 10.0
+content_margin_bottom = 5.0
+bg_color = Color(0.427451, 0.352941, 0.85098, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.231373, 0.0666667, 0.345098, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_goxld"]
+content_margin_left = 10.0
+content_margin_top = 5.0
+content_margin_right = 10.0
+content_margin_bottom = 5.0
+bg_color = Color(0.202611, 0.13881, 0.465933, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.231373, 0.0666667, 0.345098, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pt1b0"]
+bg_color = Color(0.741176, 0.0235294, 0.482353, 0.760784)
 
 [resource]
 Button/font_sizes/font_size = 10
 Button/fonts/font = ExtResource("1_yvlxm")
+Button/styles/focus = SubResource("StyleBoxFlat_4t2u5")
+Button/styles/hover = SubResource("StyleBoxFlat_swwbs")
+Button/styles/normal = SubResource("StyleBoxFlat_ghyt1")
+Button/styles/pressed = SubResource("StyleBoxFlat_goxld")
 MarginContainer/constants/margin_bottom = 10
 MarginContainer/constants/margin_left = 10
 MarginContainer/constants/margin_right = 10
 MarginContainer/constants/margin_top = 10
+PanelContainer/styles/panel = SubResource("StyleBoxFlat_pt1b0")
