@@ -7,6 +7,8 @@
 [ext_resource type="Texture2D" uid="uid://dlewmisjce73f" path="res://ui/crab-walk-1.png" id="4_iugci"]
 
 [node name="MainMenuScreen" type="CanvasLayer"]
+process_mode = 3
+layer = 2
 script = ExtResource("1_opsg5")
 
 [node name="TextureRect" type="TextureRect" parent="."]
