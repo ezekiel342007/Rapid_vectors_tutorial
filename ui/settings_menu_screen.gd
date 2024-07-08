@@ -24,3 +24,27 @@ func _ready():
 
 	for resolution in resolutions:
 		resolution_option_button.add_item(resolution)
+
+		initialize_controls()
+
+
+func initialize_controls():
+	SettingsManager.load_settings()
+	var settings_data: SettingsDataResource = SettingsManager.get_settings()
+	window_mode_option_button.selected = settings_data.window_mode_index
+	resolution_option_button.selected = settings_data.resolution_index
+
+
+func _on_window_mode_option_button_item_selected(index):
+	var window_mode = window_modes.get(window_mode_option_button.get_item_text(index)) as int
+	SettingsManager.set_window_mode(window_mode, index)
+
+
+func _on_resolution_option_button_item_selected(index):
+	var resolution = resolutions.get(resolution_option_button.get_item_text(index)) as Vector2i
+	SettingsManager.set_resolution(resolution, index)
+
+
+func _on_main_menu_button_pressed():
+	SettingsManager.save_settings()
+	queue_free()

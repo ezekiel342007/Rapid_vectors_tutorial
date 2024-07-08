@@ -20,6 +20,7 @@ config/icon="res://icon.svg"
 GameManager="*res://Scripts/game_manager.gd"
 HealthManager="*res://Scripts/health_manager.gd"
 CollectibleManager="*res://Scripts/collectible_manager.gd"
+SettingsManager="*res://Scripts/settings_manager.gd"
 
 [display]
 

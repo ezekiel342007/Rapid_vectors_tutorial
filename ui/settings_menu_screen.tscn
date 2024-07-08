@@ -12,7 +12,7 @@ layer = 2
 script = ExtResource("1_47rb0")
 
 [node name="TextureRect" type="TextureRect" parent="."]
-modulate = Color(0.231373, 0.0666667, 0.345098, 1)
+modulate = Color(0.838729, 0.34437, 0.742462, 1)
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -65,3 +65,7 @@ texture = ExtResource("4_dmavg")
 [node name="Crab-walk-1" type="Sprite2D" parent="."]
 position = Vector2(365, 252)
 texture = ExtResource("5_t8egu")
+
+[connection signal="item_selected" from="MarginContainer/PanelContainer/MarginContainer/VBoxContainer/WindowModeOptionButton" to="." method="_on_window_mode_option_button_item_selected"]
+[connection signal="item_selected" from="MarginContainer/PanelContainer/MarginContainer/VBoxContainer/ResolutionOptionButton" to="." method="_on_resolution_option_button_item_selected"]
+[connection signal="pressed" from="MarginContainer/PanelContainer/MarginContainer/VBoxContainer/MainMenuButton" to="." method="_on_main_menu_button_pressed"]

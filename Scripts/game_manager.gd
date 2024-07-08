@@ -3,11 +3,11 @@ extends Node
 var level_1 = preload("res://levels/level_1.tscn")
 var main_menu_screen = preload("res://ui/main_menu_screen.tscn")
 var pause_menu_screen = preload("res://ui/pause_menu_screen.tscn")
-
-
-# Called when the node enters the scene tree for the first time.
+ 
 func _ready():
 	RenderingServer.set_default_clear_color(Color(0.46, 0.00, 0.56, 1.00))
+
+	SettingsManager.load_settings()
 
 
 func start_game():
