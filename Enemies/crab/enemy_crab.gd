@@ -14,13 +14,14 @@ const GRAVITY = 1000
 
 enum State { Idle, Walk }
 
+var can_walk: bool
 var current_state: State
-var direction: Vector2 = Vector2.LEFT
 var number_of_points: int
-var point_positions: Array[Vector2]
 var current_point: Vector2
 var current_point_position: int
-var can_walk: bool
+var point_positions: Array[Vector2]
+var direction: Vector2 = Vector2.LEFT
+
 
 func _ready():
 	if patrol_points != null:
@@ -28,13 +29,14 @@ func _ready():
 		for point in patrol_points.get_children():
 			point_positions.append(point.global_position)
 		current_point = point_positions[current_point_position]
-	else:
-		print("No patrol points")
+	# else:
+		# print("No patrol points")
 		
 	timer.wait_time = wait_time
 	
 	current_state = State.Idle
 	
+
 func _physics_process(delta: float):
 	enemy_gravity(delta)
 	enemy_idle(delta)
@@ -42,13 +44,16 @@ func _physics_process(delta: float):
 	move_and_slide()
 	enemy_animations()
 	
+
 func enemy_gravity(delta: float):
 	velocity.y += GRAVITY * delta
+
 
 func enemy_idle(delta: float):
 	if !can_walk:
 		velocity.x = move_toward(velocity.x, 0, speed * delta)
 		current_state = State.Idle
+
 
 func enemy_walk(delta: float):
 	if !can_walk:
@@ -72,27 +77,26 @@ func enemy_walk(delta: float):
 		timer.start()
 	animated_sprite_2d.flip_h = direction.x > 0
 
+
 func enemy_animations():
 	if current_state == State.Idle && !can_walk:
 		animated_sprite_2d.play("idle")
 	elif current_state == State.Walk && can_walk:
 		animated_sprite_2d.play("walk")
 
+
 func _on_timer_timeout():
 	can_walk = true
 
 
 func _on_hurtbox_area_entered(area: Area2D):
-	print("Hurtbox area entered")
+	# print("Hurtbox area entered")
 	if area.get_parent().has_method("get_damage_amount"):
 		var node = area.get_parent() as Node
 		health_amount -= node.damage_amount
-		print("Health amount: ", health_amount)
+		# print("Health amount: ", health_amount)
 		if health_amount <= 0:
 			var enemy_death_effect_instance = enemy_death_effect.instantiate() as Node2D
 			enemy_death_effect_instance.global_position = global_position
 			get_parent().add_child(enemy_death_effect_instance)
 			queue_free()
-
-
-

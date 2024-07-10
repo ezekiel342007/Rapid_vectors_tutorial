@@ -13,11 +13,13 @@ var player_death_effect = preload("res://Player/player_death_effect/player_death
 @export var max_horizontal_speed: int =  300 
 @export var jump_horizontal_speed: int = 1000
 @export var max_jump_horizontal_speed: int =  300 
+@export var jump_count: int = 1
 
 const GRAVITY = 1000
 
 var muzzle_position
 var current_state: State
+var current_jump_count: int
 
 enum State { Idle, Run, Jump, Shoot }
 
@@ -70,8 +72,16 @@ func player_run(delta: float):
 
 
 func player_jump(delta: float):
-	if Input.is_action_just_pressed("jump"):
+	var jump_input: bool = Input.is_action_just_pressed("jump")
+	if is_on_floor() && jump_input:
+		current_jump_count = 0
 		velocity.y = jump
+		current_jump_count += 1
+		current_state = State.Jump
+
+	if !is_on_floor() && jump_input && current_jump_count < jump_count:
+		velocity.y = jump
+		current_jump_count += 1
 		current_state = State.Jump
 
 	if !is_on_floor() and current_state == State.Jump:
@@ -124,7 +134,7 @@ func import_movement():
 
 func _on_hurtbox_body_entered(body: Node2D):
 	if body.is_in_group("Enemy"):
-		print("Enemy entered: ", body.damage_amount)
+		# print("Enemy entered: ", body.damage_amount)
 		hit_animation_player.play("hit")
 		HealthManager.decrease_health(body.damage_amount)
 	if HealthManager.current_health == 0:

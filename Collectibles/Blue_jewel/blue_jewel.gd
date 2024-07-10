@@ -11,8 +11,8 @@ func _ready():
 
 
 func _on_area_2d_body_entered(body):
-	if body.is_in_group("Player"):
-		print(award_amount)
+	# if body.is_in_group("Player"):
+	# 	print(award_amount)
 
 	animated_sprite_2d.hide()
 

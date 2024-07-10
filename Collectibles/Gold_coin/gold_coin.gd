@@ -9,8 +9,8 @@ func _ready():
 	label.hide()
 
 func _on_area_2d_body_entered(body):
-	if body.is_in_group("Player"):
-		print("coid collected")
+	# if body.is_in_group("Player"):
+	# 	print("coid collected")
 
 	CollectibleManager.give_collectible_award(award_amount)
 
