@@ -13,7 +13,7 @@ var player_death_effect = preload("res://Player/player_death_effect/player_death
 @export var max_horizontal_speed: int =  300 
 @export var jump_horizontal_speed: int = 1000
 @export var max_jump_horizontal_speed: int =  300 
-@export var jump_count: int = 1
+@export var jump_count: int = 4
 
 const GRAVITY = 1000
 
