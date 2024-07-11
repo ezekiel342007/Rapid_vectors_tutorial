@@ -59,7 +59,7 @@ func enemy_walk(delta: float):
 	if !can_walk:
 		return
 		
-	if abs(position.x -current_point.x) > 0.5:
+	if abs(position.x - current_point.x) > 0.5:
 		velocity.x = direction.x * speed * delta
 		current_state = State.Walk
 	else:

@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://dm8e84n5wrolo"]
+[gd_scene load_steps=12 format=3 uid="uid://dm8e84n5wrolo"]
 
 [ext_resource type="PackedScene" uid="uid://dt0vhbsvhfkf" path="res://levels/base_level.tscn" id="1_xrkdb"]
 [ext_resource type="PackedScene" uid="uid://ci7bmadwlres0" path="res://background/parallax_background.tscn" id="2_3nrdk"]
@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://d20w5d06lbuan" path="res://Enemies/dino/enemy_dino.tscn" id="8_6qw6v"]
 [ext_resource type="PackedScene" uid="uid://cyg1btbnei52j" path="res://pickups/health_pickup/health_pickup.tscn" id="9_faka7"]
 [ext_resource type="PackedScene" uid="uid://cr31voe3c0oo" path="res://levels/Door/door.tscn" id="10_an5ak"]
+[ext_resource type="PackedScene" uid="uid://d2sqfrnuthhbm" path="res://levels/Keys/key.tscn" id="11_d2jsa"]
 
 [node name="Level1" instance=ExtResource("1_xrkdb")]
 
@@ -56,23 +57,35 @@ position = Vector2(1303, -47)
 [node name="BlueCoin4" parent="Collectibles" index="6" instance=ExtResource("6_bo5rs")]
 position = Vector2(1868, -217)
 
-[node name="Player" parent="." index="4"]
-position = Vector2(552, -56)
+[node name="Door1" type="Node" parent="." index="4"]
+
+[node name="Door" parent="Door1" index="0" instance=ExtResource("10_an5ak")]
+z_index = 1
+position = Vector2(2256, -224)
+rotation = -3.14159
+scale = Vector2(1, -1)
+next_scene = "level2"
+
+[node name="Key" parent="Door1" index="1" instance=ExtResource("11_d2jsa")]
+position = Vector2(32, -192)
+
+[node name="Player" parent="." index="5"]
+position = Vector2(32, -40)
 jump_count = 3
 
-[node name="Enemies" type="Node2D" parent="." index="5"]
+[node name="Enemies" type="Node2D" parent="." index="6"]
 
 [node name="EnemyCrab" parent="Enemies" index="0" node_paths=PackedStringArray("patrol_points") instance=ExtResource("3_qj1ha")]
-position = Vector2(80, -56)
+position = Vector2(456, -64)
 patrol_points = NodePath("PatrolPoints")
 
 [node name="PatrolPoints" type="Node2D" parent="Enemies/EnemyCrab" index="3"]
 
 [node name="Point1" type="Marker2D" parent="Enemies/EnemyCrab/PatrolPoints" index="0"]
-position = Vector2(-129, 8)
+position = Vector2(408, 0)
 
 [node name="Point2" type="Marker2D" parent="Enemies/EnemyCrab/PatrolPoints" index="1"]
-position = Vector2(34, 5)
+position = Vector2(544, -8)
 
 [node name="EnemyDino" parent="Enemies" index="1" instance=ExtResource("8_6qw6v")]
 position = Vector2(1558, -236)
@@ -122,9 +135,9 @@ position = Vector2(-129, 8)
 [node name="Point2" type="Marker2D" parent="Enemies/EnemyCrab4/PatrolPoints" index="1"]
 position = Vector2(34, 5)
 
-[node name="GameScreen" parent="." index="6" instance=ExtResource("4_53xxb")]
+[node name="GameScreen" parent="." index="7" instance=ExtResource("4_53xxb")]
 
-[node name="PlayerCamera2D" parent="." index="7"]
+[node name="PlayerCamera2D" parent="." index="8"]
 limit_left = -109
 limit_top = -365
 limit_right = 2270
@@ -133,9 +146,3 @@ position_smoothing_enabled = true
 editor_draw_limits = true
 smoothing_enabled = true
 smoothing_distance = 5
-
-[node name="Door" parent="." index="8" instance=ExtResource("10_an5ak")]
-z_index = 1
-position = Vector2(2256, -224)
-scale = Vector2(-1, 1)
-next_scene = "level2"
