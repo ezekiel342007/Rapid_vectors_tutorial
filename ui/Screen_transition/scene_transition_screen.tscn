@@ -1,14 +1,17 @@
-[gd_scene load_steps=6 format=3 uid="uid://b5qah0gys7cc6"]
+[gd_scene load_steps=7 format=3 uid="uid://b5qah0gys7cc6"]
 
 [ext_resource type="Shader" path="res://ui/Screen_transition/scene_transition_screen.gdshader" id="1_sapvy"]
 [ext_resource type="Texture2D" uid="uid://ctq8lmffvqns1" path="res://ui/Screen_transition/Craters_04-128x128.png" id="2_21g0x"]
 [ext_resource type="Texture2D" uid="uid://kydsajyy15nn" path="res://ui/Screen_transition/Cracks_02-128x128.png" id="3_xrqks"]
+[ext_resource type="Theme" uid="uid://tdfxp5enye7u" path="res://ui/Theme/game_theme.tres" id="4_obhqq"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_jr0ie"]
 shader = ExtResource("1_sapvy")
-shader_parameter/colour_1 = Color(0, 0, 0, 1)
-shader_parameter/tiling_factor = 1.0
+shader_parameter/colour_1 = Color(0.759091, 1.78084e-06, 0.466641, 1)
+shader_parameter/colour_2 = Color(0.227821, 0.000116031, 0.273966, 1)
+shader_parameter/tiling_factor = 2.5
 shader_parameter/move_speed = 0.1
+shader_parameter/subtraction_speed = 2.5
 shader_parameter/noise_texture = ExtResource("3_xrqks")
 shader_parameter/dissolve_noise_texture = ExtResource("2_21g0x")
 
@@ -24,3 +27,18 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = SubResource("CanvasTexture_btgcu")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("4_obhqq")
+
+[node name="Label" type="Label" parent="MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+theme_override_colors/font_shadow_color = Color(0.561554, 0.000285512, 0.5785, 1)
+text = "LOADING"
