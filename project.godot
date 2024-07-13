@@ -26,11 +26,13 @@ InventoryManager="*res://Scripts/inventory_manager.gd"
 
 [display]
 
-window/size/viewport_width=480
-window/size/viewport_height=270
-window/size/window_width_override=717
-window/size/window_height_override=403
+window/size/viewport_width=341
+window/size/viewport_height=192
+window/size/window_width_override=682
+window/size/window_height_override=384
 window/stretch/mode="viewport"
+window/stretch/aspect="keep_height"
+window/stretch/scale_mode="integer"
 
 [input]
 
