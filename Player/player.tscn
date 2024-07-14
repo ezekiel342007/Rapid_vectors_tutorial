@@ -1,16 +1,22 @@
-[gd_scene load_steps=41 format=3 uid="uid://chlaaqbljv7jo"]
+[gd_scene load_steps=46 format=3 uid="uid://chlaaqbljv7jo"]
 
 [ext_resource type="Script" path="res://Player/player.gd" id="1_4tof4"]
 [ext_resource type="Texture2D" uid="uid://xunbdkmyo7eh" path="res://Player/player-idle.png" id="1_gjkg6"]
 [ext_resource type="Texture2D" uid="uid://ce12bs1ci5g0f" path="res://Player/player-run.png" id="2_mtv80"]
 [ext_resource type="Shader" uid="uid://snhas6f7rqyb" path="res://Player/player_hit_flash_shader.tres" id="2_umhyw"]
 [ext_resource type="Texture2D" uid="uid://cqxodsmlnopst" path="res://Player/player-jump.png" id="3_gb3fw"]
-[ext_resource type="Texture2D" uid="uid://b3qhaa0jm1hbu" path="res://Player/player--shoot-run.png" id="5_xfo2d"]
+[ext_resource type="Texture2D" uid="uid://b3qhaa0jm1hbu" path="res://Player/player--shoot-run.png" id="6_74adf"]
+[ext_resource type="Texture2D" uid="uid://dl3bvsaa4cjek" path="res://Player/player-shoot-while-cling.png" id="7_e75h6"]
+[ext_resource type="Texture2D" uid="uid://be3orym8ej5gf" path="res://Player/player-shoot-crouch.png" id="7_iqqo1"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_x3kfo"]
 shader = ExtResource("2_umhyw")
 shader_parameter/enabled = false
 shader_parameter/hit_color = Color(0.827321, 0, 0.140882, 1)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b0hij"]
+atlas = ExtResource("2_mtv80")
+region = Rect2(400, 0, 80, 80)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_tfx3m"]
 atlas = ExtResource("1_gjkg6")
@@ -93,47 +99,63 @@ atlas = ExtResource("2_mtv80")
 region = Rect2(720, 0, 80, 80)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ptpop"]
-atlas = ExtResource("5_xfo2d")
+atlas = ExtResource("6_74adf")
 region = Rect2(0, 0, 80, 80)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_tbq6h"]
-atlas = ExtResource("5_xfo2d")
+atlas = ExtResource("6_74adf")
 region = Rect2(80, 0, 80, 80)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_n41o6"]
-atlas = ExtResource("5_xfo2d")
+atlas = ExtResource("6_74adf")
 region = Rect2(160, 0, 80, 80)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_j5k3p"]
-atlas = ExtResource("5_xfo2d")
+atlas = ExtResource("6_74adf")
 region = Rect2(240, 0, 80, 80)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_rsyut"]
-atlas = ExtResource("5_xfo2d")
+atlas = ExtResource("6_74adf")
 region = Rect2(320, 0, 80, 80)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_vf2sb"]
-atlas = ExtResource("5_xfo2d")
+atlas = ExtResource("6_74adf")
 region = Rect2(400, 0, 80, 80)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_qhw5p"]
-atlas = ExtResource("5_xfo2d")
+atlas = ExtResource("6_74adf")
 region = Rect2(480, 0, 80, 80)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_gmcyh"]
-atlas = ExtResource("5_xfo2d")
+atlas = ExtResource("6_74adf")
 region = Rect2(560, 0, 80, 80)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_f6yum"]
-atlas = ExtResource("5_xfo2d")
+atlas = ExtResource("6_74adf")
 region = Rect2(640, 0, 80, 80)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_xd3c3"]
-atlas = ExtResource("5_xfo2d")
+atlas = ExtResource("6_74adf")
 region = Rect2(720, 0, 80, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6dp27"]
+atlas = ExtResource("7_e75h6")
+region = Rect2(0, 0, 80, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6y7wx"]
+atlas = ExtResource("7_iqqo1")
+region = Rect2(0, 0, 80, 80)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_sqcc5"]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b0hij")
+}],
+"loop": true,
+"name": &"fall",
+"speed": 5.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_tfx3m")
@@ -243,6 +265,27 @@ animations = [{
 "loop": true,
 "name": &"run_and_shoot",
 "speed": 12.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6dp27")
+}],
+"loop": false,
+"name": &"shoot-and-cling",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6y7wx")
+}],
+"loop": true,
+"name": &"shoot-crouch",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"shoot-up",
+"speed": 5.0
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_kep8n"]
@@ -260,7 +303,7 @@ script = ExtResource("1_4tof4")
 material = SubResource("ShaderMaterial_x3kfo")
 position = Vector2(0, -24)
 sprite_frames = SubResource("SpriteFrames_sqcc5")
-animation = &"idle"
+animation = &"shoot-and-cling"
 autoplay = "idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
