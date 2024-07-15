@@ -12,11 +12,13 @@ func _ready():
 	for child in get_children():
 		if child is NodeState:
 			node_states[child.name.to_lower()] = child
+			child.transition.connect(transition_to)
 
-		# If there was an initial node state make the current node state that state
-		if initial_node_state:
-			initial_node_state.enter()
-			current_node_state = initial_node_state
+	# If there was an initial node state make the current node state that state
+	if initial_node_state:
+		initial_node_state.enter()
+		current_node_state = initial_node_state
+		current_node_state_name = current_node_state.name
 
 
 func _process(delta: float):
@@ -28,7 +30,7 @@ func _physics_process(delta: float):
 	if current_node_state:
 		current_node_state.on_physics_process(delta)
 
-	# print("Current State: ", current_node_state_name.to_lower())
+	print("Current State: ", current_node_state_name.to_lower())
 	
 func transition_to(node_state_name: String):
 	# Checks if the given state is already the current state

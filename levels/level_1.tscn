@@ -71,7 +71,6 @@ position = Vector2(32, -192)
 
 [node name="Player" parent="." index="5"]
 position = Vector2(32, -40)
-jump_count = 3
 
 [node name="Enemies" type="Node2D" parent="." index="6"]
 

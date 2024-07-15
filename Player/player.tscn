@@ -1,4 +1,4 @@
-[gd_scene load_steps=46 format=3 uid="uid://chlaaqbljv7jo"]
+[gd_scene load_steps=50 format=3 uid="uid://chlaaqbljv7jo"]
 
 [ext_resource type="Script" path="res://Player/player.gd" id="1_4tof4"]
 [ext_resource type="Texture2D" uid="uid://xunbdkmyo7eh" path="res://Player/player-idle.png" id="1_gjkg6"]
@@ -8,6 +8,10 @@
 [ext_resource type="Texture2D" uid="uid://b3qhaa0jm1hbu" path="res://Player/player--shoot-run.png" id="6_74adf"]
 [ext_resource type="Texture2D" uid="uid://dl3bvsaa4cjek" path="res://Player/player-shoot-while-cling.png" id="7_e75h6"]
 [ext_resource type="Texture2D" uid="uid://be3orym8ej5gf" path="res://Player/player-shoot-crouch.png" id="7_iqqo1"]
+[ext_resource type="Script" path="res://Scripts/state_machine/node_finite_state_machine.gd" id="9_1mp1b"]
+[ext_resource type="Script" path="res://Player/player_states/idle_state.gd" id="10_7phcs"]
+[ext_resource type="Script" path="res://Player/player_states/fall_state.gd" id="11_qwabh"]
+[ext_resource type="Script" path="res://Player/player_states/run_states.gd" id="12_a8aeh"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_x3kfo"]
 shader = ExtResource("2_umhyw")
@@ -301,7 +305,7 @@ script = ExtResource("1_4tof4")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 material = SubResource("ShaderMaterial_x3kfo")
-position = Vector2(0, -24)
+position = Vector2(-1, -24)
 sprite_frames = SubResource("SpriteFrames_sqcc5")
 animation = &"shoot-and-cling"
 autoplay = "idle"
@@ -321,5 +325,24 @@ collision_mask = 4
 position = Vector2(0, -19)
 shape = SubResource("CapsuleShape2D_qbv1i")
 debug_color = Color(0.919885, 0.263767, 0.262387, 0.42)
+
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_node_state")]
+script = ExtResource("9_1mp1b")
+initial_node_state = NodePath("Idle")
+
+[node name="Idle" type="Node" parent="StateMachine" node_paths=PackedStringArray("character_body_2d", "animated_sprite_2d")]
+script = ExtResource("10_7phcs")
+character_body_2d = NodePath("../..")
+animated_sprite_2d = NodePath("../../AnimatedSprite2D")
+
+[node name="Fall" type="Node" parent="StateMachine" node_paths=PackedStringArray("character_body_2d", "animated_sprite_2d")]
+script = ExtResource("11_qwabh")
+character_body_2d = NodePath("../..")
+animated_sprite_2d = NodePath("../../AnimatedSprite2D")
+
+[node name="Run" type="Node" parent="StateMachine" node_paths=PackedStringArray("character_body_2d", "animated_sprite_2d")]
+script = ExtResource("12_a8aeh")
+character_body_2d = NodePath("../..")
+animated_sprite_2d = NodePath("../../AnimatedSprite2D")
 
 [connection signal="body_entered" from="Hurtbox" to="." method="_on_hurtbox_body_entered"]
