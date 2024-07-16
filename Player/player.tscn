@@ -1,4 +1,4 @@
-[gd_scene load_steps=50 format=3 uid="uid://chlaaqbljv7jo"]
+[gd_scene load_steps=52 format=3 uid="uid://chlaaqbljv7jo"]
 
 [ext_resource type="Script" path="res://Player/player.gd" id="1_4tof4"]
 [ext_resource type="Texture2D" uid="uid://xunbdkmyo7eh" path="res://Player/player-idle.png" id="1_gjkg6"]
@@ -12,6 +12,8 @@
 [ext_resource type="Script" path="res://Player/player_states/idle_state.gd" id="10_7phcs"]
 [ext_resource type="Script" path="res://Player/player_states/fall_state.gd" id="11_qwabh"]
 [ext_resource type="Script" path="res://Player/player_states/run_states.gd" id="12_a8aeh"]
+[ext_resource type="Script" path="res://Player/player_states/jump_state.gd" id="13_djg00"]
+[ext_resource type="Script" path="res://Player/player_states/shoot_stand_state.gd" id="14_68pdp"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_x3kfo"]
 shader = ExtResource("2_umhyw")
@@ -344,5 +346,14 @@ animated_sprite_2d = NodePath("../../AnimatedSprite2D")
 script = ExtResource("12_a8aeh")
 character_body_2d = NodePath("../..")
 animated_sprite_2d = NodePath("../../AnimatedSprite2D")
+
+[node name="Jump" type="Node" parent="StateMachine" node_paths=PackedStringArray("character_body_2d", "animated_sprite_2d")]
+script = ExtResource("13_djg00")
+character_body_2d = NodePath("../..")
+animated_sprite_2d = NodePath("../../AnimatedSprite2D")
+max_jump_count = 2
+
+[node name="ShootStand" type="Node" parent="StateMachine"]
+script = ExtResource("14_68pdp")
 
 [connection signal="body_entered" from="Hurtbox" to="." method="_on_hurtbox_body_entered"]

@@ -17,14 +17,19 @@ func on_physics_process(delta: float):
 	character_body_2d.move_and_slide()
 	# transmitting states
 
-	# fall state
+	# Fall state
 	if !character_body_2d.is_on_floor():
 		transition.emit("Fall")
 
 	var direction: float = GameInputEvents.movement_input()
 
+	# Run state
 	if direction and character_body_2d.is_on_floor():
 		transition.emit("Run")
+
+	# Jump state
+	if GameInputEvents.jump_input():
+		transition.emit("Jump")
 
 
 func enter():
