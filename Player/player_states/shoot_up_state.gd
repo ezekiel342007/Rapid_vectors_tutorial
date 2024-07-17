@@ -14,7 +14,7 @@ func on_process(_delta: float) -> void:
 func on_physics_process(_delta: float) -> void:
 	position_muzzle()
 
-	if GameInputEvents.shoot_input():
+	if GameInputEvents.shoot_up_input():
 		gun_shooting()
 
 	# Transitioning states
@@ -30,11 +30,11 @@ func on_physics_process(_delta: float) -> void:
 
 
 func enter() -> void:
-	muzzle.position = Vector2(19, -26)
+	muzzle.position = Vector2(3, -42)
 	muzzle_position = muzzle.position
 
 	get_tree().create_timer(hold_gun_time).timeout.connect(on_hold_gun_timeout)
-	animated_sprite_2d.play("shoot_stand")
+	animated_sprite_2d.play("shoot-up")
 	
 func exit() -> void:
 	animated_sprite_2d.stop()
@@ -56,7 +56,7 @@ func gun_shooting() -> void:
 	var direction: float = -1 if animated_sprite_2d.flip_h == true else 1
 	
 	var bullet_instance = bullet.instantiate() as Node2D
-	bullet_instance.direction = direction
-	bullet_instance.move_x_direction = true
+	bullet_instance.direction = -1
+	bullet_instance.move_x_direction = false
 	bullet_instance.global_position = muzzle.global_position
 	get_parent().add_child(bullet_instance)
