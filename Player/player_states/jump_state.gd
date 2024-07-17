@@ -10,6 +10,7 @@ extends NodeState
 @export var max_jump_count: int = 1
 @export var jump_gravity: int = 700
 var current_jump_count: int = 1
+var coyote_jump: bool
 
 
 func on_process(_delta: float):
@@ -21,11 +22,17 @@ func on_physics_process(delta: float):
 	if character_body_2d.is_on_floor():
 		current_jump_count = 0
 		character_body_2d.velocity.y = jump_height
+		coyote_jump = false
+		current_jump_count += 1
+
+	if coyote_jump:
+		character_body_2d.velocity.y = jump_height
+		coyote_jump = false
 		current_jump_count += 1
 
 	# Multiple jumps
 	if !character_body_2d.is_on_floor() and GameInputEvents.jump_input() and current_jump_count < max_jump_count:
-		character_body_2d.velocity.y += jump_height
+		character_body_2d.velocity.y = jump_height
 		current_jump_count += 1
 
 	var direciton: float = GameInputEvents.movement_input()
@@ -48,7 +55,9 @@ func on_physics_process(delta: float):
 	
 
 func enter():
+	coyote_jump = true
 	animated_sprite_2d.play("jump")
 	
 func exit():
+	coyote_jump = false
 	animated_sprite_2d.stop()

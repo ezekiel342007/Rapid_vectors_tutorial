@@ -53,6 +53,7 @@ func enter() -> void:
 
 func exit() -> void:
 	wall_cling_direction = Vector2.ZERO
+	print("Stopped clinging")
 	animated_sprite_2d.stop()
 
 
