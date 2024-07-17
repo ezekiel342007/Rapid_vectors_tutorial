@@ -3,16 +3,15 @@ extends NodeState
 @export var character_body_2d: CharacterBody2D
 @export var animated_sprite_2d: AnimatedSprite2D
 @export var muzzle: Marker2D
-@export var hold_gun_time: float = 2.0
-
 var bullet = preload("res://Player/bullet.tscn")
+
 var muzzle_position: Vector2
 
 
 func on_process(_delta: float) -> void:
 	pass
-
 	
+
 func on_physics_process(_delta: float) -> void:
 	position_muzzle()
 
@@ -32,19 +31,14 @@ func on_physics_process(_delta: float) -> void:
 
 
 func enter() -> void:
-	muzzle.position = Vector2(21, -27)
+	muzzle.position = Vector2(19, -14)
 	muzzle_position = muzzle.position
 
-	get_tree().create_timer(hold_gun_time).timeout.connect(on_hold_gun_timeout)
-	animated_sprite_2d.play("shoot_stand")
+	animated_sprite_2d.play("shoot-crouch")
 	
 
 func exit() -> void:
 	animated_sprite_2d.stop()
-
-
-func on_hold_gun_timeout() -> void:
-	transition.emit("Idle")
 
 
 func position_muzzle() -> void:

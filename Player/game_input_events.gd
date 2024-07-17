@@ -33,6 +33,6 @@ static func fall_input() -> bool:
 	return fall_input_pressed
 
 
-static func wall_cling() -> bool:
-	var wall_cling_pressed: bool = Input.is_action_just_pressed("wall_cling")
+static func wall_cling_input() -> bool:
+	var wall_cling_pressed: bool = Input.is_action_pressed("wall_cling")
 	return wall_cling_pressed

@@ -8,8 +8,10 @@ var bullet = preload("res://Player/bullet.tscn")
 
 var muzzle_position: Vector2
 
+
 func on_process(_delta: float) -> void:
 	pass
+
 	
 func on_physics_process(_delta: float) -> void:
 	position_muzzle()
@@ -35,6 +37,7 @@ func enter() -> void:
 
 	get_tree().create_timer(hold_gun_time).timeout.connect(on_hold_gun_timeout)
 	animated_sprite_2d.play("shoot-up")
+
 	
 func exit() -> void:
 	animated_sprite_2d.stop()
@@ -42,7 +45,6 @@ func exit() -> void:
 
 func on_hold_gun_timeout() -> void:
 	transition.emit("Idle")
-
 
 
 func position_muzzle() -> void:

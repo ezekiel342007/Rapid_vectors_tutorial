@@ -39,6 +39,10 @@ func on_physics_process(_delta: float):
 	if GameInputEvents.shoot_up_input():
 		transition.emit("ShootUp")
 
+	# Shoot crouch state
+	if GameInputEvents.crouch_input():
+		transition.emit("ShootCrouch")
+
 
 func enter():
 	animated_sprite_2d.play("idle")

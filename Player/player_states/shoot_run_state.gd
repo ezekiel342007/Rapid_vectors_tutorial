@@ -3,7 +3,10 @@ extends NodeState
 @export var character_body_2d: CharacterBody2D
 @export var animated_sprite_2d: AnimatedSprite2D
 @export var muzzle: Marker2D
-@export var hold_gun_time: float = 2.0
+
+@export_category("Run State")
+@export var speed: int = 1000
+@export var max_horizontal_speed: int = 300
 
 var bullet = preload("res://Player/bullet.tscn")
 var muzzle_position: Vector2
@@ -14,49 +17,55 @@ func on_process(_delta: float) -> void:
 
 	
 func on_physics_process(_delta: float) -> void:
-	position_muzzle()
+	var direction: float = GameInputEvents.movement_input()
+	position_muzzle(direction)
+
+	if direction:
+		character_body_2d.velocity.x += direction * speed
+		character_body_2d.velocity.x = clamp(character_body_2d.velocity.x, -max_horizontal_speed, max_horizontal_speed)
+
+	if direction != 0:
+		animated_sprite_2d.flip_h = true if direction < 0 else false
 
 	if GameInputEvents.shoot_input():
-		gun_shooting()
+		gun_shooting(direction)
+
+	character_body_2d.move_and_slide()
 
 	# Transitioning states
 
-	# Run state
-	var direction: float = GameInputEvents.movement_input()
-	if direction and character_body_2d.is_on_floor():
-		transition.emit("Run")
+	# Fall state
+	if !character_body_2d.is_on_floor():
+		transition.emit("Fall")
 
 	# Jump state
 	if GameInputEvents.jump_input():
 		transition.emit("Jump")
 
+	# Idle state
+	if direction == 0:
+		transition.emit("Idle")
+
 
 func enter() -> void:
-	muzzle.position = Vector2(21, -27)
+	muzzle.position = Vector2(19, -27)
 	muzzle_position = muzzle.position
 
-	get_tree().create_timer(hold_gun_time).timeout.connect(on_hold_gun_timeout)
-	animated_sprite_2d.play("shoot_stand")
+	animated_sprite_2d.play("run_and_shoot")
 	
 
 func exit() -> void:
 	animated_sprite_2d.stop()
 
 
-func on_hold_gun_timeout() -> void:
-	transition.emit("Idle")
-
-
-func position_muzzle() -> void:
-	if !animated_sprite_2d.flip_h:
+func position_muzzle(direction: float) -> void:
+	if direction > 0:
 		muzzle.position.x = muzzle_position.x
-	elif animated_sprite_2d.flip_h:
+	elif direction < 0:
 		muzzle.position.x = -muzzle_position.x
 
 
-func gun_shooting() -> void:
-	var direction: float = -1 if animated_sprite_2d.flip_h == true else 1
-	
+func gun_shooting(direction: float) -> void:
 	var bullet_instance = bullet.instantiate() as Node2D
 	bullet_instance.direction = direction
 	bullet_instance.move_x_direction = true

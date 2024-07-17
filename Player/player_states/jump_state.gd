@@ -41,6 +41,10 @@ func on_physics_process(delta: float):
 	# Idle state
 	if character_body_2d.is_on_floor():
 		transition.emit("Idle")
+
+	# Wall cling state
+	if GameInputEvents.wall_cling_input() and character_body_2d.is_on_wall():
+		transition.emit("ShootWallCling")
 	
 
 func enter():

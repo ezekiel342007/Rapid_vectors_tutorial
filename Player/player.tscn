@@ -1,4 +1,4 @@
-[gd_scene load_steps=59 format=3 uid="uid://chlaaqbljv7jo"]
+[gd_scene load_steps=62 format=3 uid="uid://chlaaqbljv7jo"]
 
 [ext_resource type="Script" path="res://Player/player.gd" id="1_4tof4"]
 [ext_resource type="Texture2D" uid="uid://xunbdkmyo7eh" path="res://Player/player-idle.png" id="1_gjkg6"]
@@ -17,8 +17,12 @@
 [ext_resource type="Script" path="res://Player/player_states/run_state.gd" id="14_0anms"]
 [ext_resource type="Script" path="res://Player/player_states/shoot_stand_state.gd" id="14_68pdp"]
 [ext_resource type="Script" path="res://Player/player_states/shoot_up_state.gd" id="17_7j8ov"]
+[ext_resource type="Script" path="res://Player/player_states/shoot_crouch_state.gd" id="18_pkr75"]
+[ext_resource type="Script" path="res://Player/player_states/shoot_run_state.gd" id="19_68ydi"]
+[ext_resource type="Script" path="res://Player/player_states/shoot_wall_cling_state.gd" id="20_lwapu"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_kep8n"]
+radius = 9.0
 height = 42.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_x3kfo"]
@@ -349,17 +353,18 @@ shape = SubResource("CapsuleShape2D_kep8n")
 material = SubResource("ShaderMaterial_x3kfo")
 position = Vector2(-1, -5)
 sprite_frames = SubResource("SpriteFrames_sqcc5")
-animation = &"shoot_stand"
+animation = &"shoot-and-cling"
 autoplay = "idle"
 
 [node name="Muzzle" type="Marker2D" parent="."]
-position = Vector2(19, -26)
+position = Vector2(19, -27)
 
 [node name="Hurtbox" type="Area2D" parent="."]
 collision_layer = 2
 collision_mask = 4
 
 [node name="HurtBoxCollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+visible = false
 position = Vector2(0, -19)
 shape = SubResource("CapsuleShape2D_qbv1i")
 debug_color = Color(0.919885, 0.263767, 0.262387, 0.42)
@@ -397,6 +402,24 @@ muzzle = NodePath("../../Muzzle")
 
 [node name="ShootUp" type="Node" parent="StateMachine" node_paths=PackedStringArray("character_body_2d", "animated_sprite_2d", "muzzle")]
 script = ExtResource("17_7j8ov")
+character_body_2d = NodePath("../..")
+animated_sprite_2d = NodePath("../../CollisionShape2D/AnimatedSprite2D")
+muzzle = NodePath("../../Muzzle")
+
+[node name="ShootCrouch" type="Node" parent="StateMachine" node_paths=PackedStringArray("character_body_2d", "animated_sprite_2d", "muzzle")]
+script = ExtResource("18_pkr75")
+character_body_2d = NodePath("../..")
+animated_sprite_2d = NodePath("../../CollisionShape2D/AnimatedSprite2D")
+muzzle = NodePath("../../Muzzle")
+
+[node name="ShootRun" type="Node" parent="StateMachine" node_paths=PackedStringArray("character_body_2d", "animated_sprite_2d", "muzzle")]
+script = ExtResource("19_68ydi")
+character_body_2d = NodePath("../..")
+animated_sprite_2d = NodePath("../../CollisionShape2D/AnimatedSprite2D")
+muzzle = NodePath("../../Muzzle")
+
+[node name="ShootWallCling" type="Node" parent="StateMachine" node_paths=PackedStringArray("character_body_2d", "animated_sprite_2d", "muzzle")]
+script = ExtResource("20_lwapu")
 character_body_2d = NodePath("../..")
 animated_sprite_2d = NodePath("../../CollisionShape2D/AnimatedSprite2D")
 muzzle = NodePath("../../Muzzle")
