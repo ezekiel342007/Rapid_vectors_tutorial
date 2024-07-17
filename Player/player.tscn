@@ -1,4 +1,4 @@
-[gd_scene load_steps=52 format=3 uid="uid://chlaaqbljv7jo"]
+[gd_scene load_steps=58 format=3 uid="uid://chlaaqbljv7jo"]
 
 [ext_resource type="Script" path="res://Player/player.gd" id="1_4tof4"]
 [ext_resource type="Texture2D" uid="uid://xunbdkmyo7eh" path="res://Player/player-idle.png" id="1_gjkg6"]
@@ -9,7 +9,9 @@
 [ext_resource type="Texture2D" uid="uid://dl3bvsaa4cjek" path="res://Player/player-shoot-while-cling.png" id="7_e75h6"]
 [ext_resource type="Texture2D" uid="uid://be3orym8ej5gf" path="res://Player/player-shoot-crouch.png" id="7_iqqo1"]
 [ext_resource type="Script" path="res://Scripts/state_machine/node_finite_state_machine.gd" id="9_1mp1b"]
+[ext_resource type="Texture2D" uid="uid://qsmrdl6s0ohk" path="res://Player/player-shoot-up.png" id="9_jvl10"]
 [ext_resource type="Script" path="res://Player/player_states/idle_state.gd" id="10_7phcs"]
+[ext_resource type="Texture2D" uid="uid://d0by6pveajflp" path="res://Player/player-shoot-stand.png" id="10_hniwp"]
 [ext_resource type="Script" path="res://Player/player_states/fall_state.gd" id="11_qwabh"]
 [ext_resource type="Script" path="res://Player/player_states/run_states.gd" id="12_a8aeh"]
 [ext_resource type="Script" path="res://Player/player_states/jump_state.gd" id="13_djg00"]
@@ -152,6 +154,22 @@ region = Rect2(0, 0, 80, 80)
 atlas = ExtResource("7_iqqo1")
 region = Rect2(0, 0, 80, 80)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_slgle"]
+atlas = ExtResource("9_jvl10")
+region = Rect2(0, 0, 80, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_emqg1"]
+atlas = ExtResource("10_hniwp")
+region = Rect2(0, 0, 80, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r51b5"]
+atlas = ExtResource("10_hniwp")
+region = Rect2(80, 0, 80, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_27mdv"]
+atlas = ExtResource("10_hniwp")
+region = Rect2(160, 0, 80, 80)
+
 [sub_resource type="SpriteFrames" id="SpriteFrames_sqcc5"]
 animations = [{
 "frames": [{
@@ -288,9 +306,26 @@ animations = [{
 "name": &"shoot-crouch",
 "speed": 5.0
 }, {
-"frames": [],
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_slgle")
+}],
 "loop": true,
 "name": &"shoot-up",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_emqg1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r51b5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_27mdv")
+}],
+"loop": true,
+"name": &"shoot_stand",
 "speed": 5.0
 }]
 
@@ -309,7 +344,7 @@ script = ExtResource("1_4tof4")
 material = SubResource("ShaderMaterial_x3kfo")
 position = Vector2(-1, -24)
 sprite_frames = SubResource("SpriteFrames_sqcc5")
-animation = &"shoot-and-cling"
+animation = &"shoot_stand"
 autoplay = "idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -353,7 +388,10 @@ character_body_2d = NodePath("../..")
 animated_sprite_2d = NodePath("../../AnimatedSprite2D")
 max_jump_count = 2
 
-[node name="ShootStand" type="Node" parent="StateMachine"]
+[node name="ShootStand" type="Node" parent="StateMachine" node_paths=PackedStringArray("muzzle", "character_body_2d", "animated_sprite_2d")]
 script = ExtResource("14_68pdp")
+muzzle = NodePath("../../Muzzle")
+character_body_2d = NodePath("../..")
+animated_sprite_2d = NodePath("../../AnimatedSprite2D")
 
 [connection signal="body_entered" from="Hurtbox" to="." method="_on_hurtbox_body_entered"]

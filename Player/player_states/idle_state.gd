@@ -7,11 +7,11 @@ extends NodeState
 @export var slow_down_speed: int = 1500
 
 
-func on_process(delta: float):
+func on_process(_delta: float):
 	pass
 
 	
-func on_physics_process(delta: float):
+func on_physics_process(_delta: float):
 	character_body_2d.velocity.x = move_toward(character_body_2d.velocity.x, 0, slow_down_speed)
 
 	character_body_2d.move_and_slide()
@@ -21,15 +21,19 @@ func on_physics_process(delta: float):
 	if !character_body_2d.is_on_floor():
 		transition.emit("Fall")
 
+	# Run state
 	var direction: float = GameInputEvents.movement_input()
 
-	# Run state
 	if direction and character_body_2d.is_on_floor():
 		transition.emit("Run")
 
 	# Jump state
 	if GameInputEvents.jump_input():
 		transition.emit("Jump")
+
+	# Shoot and stand state
+	if GameInputEvents.shoot_input():
+		transition.emit("ShootStand")
 
 
 func enter():
